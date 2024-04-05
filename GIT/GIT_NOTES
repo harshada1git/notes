@@ -147,7 +147,7 @@ Phase-4
 	Options:
 		- git log -n2
 		- git log --author="swapnil"
-		- git log --grep="DB code"		
+		- git log --grep="commit msg"		
 		- git log --oneline (if we want to see logs on high level that time we can use this command ie. only commit ids and msg)
 
 #Qn.
