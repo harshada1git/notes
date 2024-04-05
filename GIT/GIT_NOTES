@@ -160,7 +160,7 @@ Phase-5
 =======
 # GIT Commands
 
-1.  
+1.
 	$ git status 
 
 	$ git diff <filename>
@@ -177,4 +177,34 @@ Phase-5
 	A.) $ git mv Login.java <new-name>
 	    $ git commit -m "rename Login"
 	    $ git push
+	    
+	    =======
+Phase-6
+=======
+
+# Undoing the changes:
+
+# undo/revert local changes from source area in exits files. ie. present in remote repo.
+	$ git checkout <filename>
+
+# Unstage the changes from STAGE area
+	$ git reset HEAD <filename>
+
+# Move changes from .git to source area 
+	$ git reset --mixed HEAD~1
+
+# Move changes from .git to stage area
+	$ git reset --soft HEAD~1
+
+# Remove changes from everywhere
+	$ git reset --hard HEAD~1
+
+# Show all the files with content difference that are modified as part of a commit.
+	$git log (copy SHA-VALUE)
+	$git show <SHA-VALUE>
+
+# List only files that are committed as part of a revision.
+	$ git diff-tree --no-commit-id --name-only -r c702b992fc3b2d223991bfccb2dcd0bfdd1a2ab5
+
+
 
