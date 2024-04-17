@@ -82,6 +82,132 @@ pom.xml  - Maven's build file using which we can
 #6
 Creating a Java Project using Maven: (It is for standlone project)
 
-$ mvn archetype:generate -DgroupId=com.Flipkart -DartifactId=Flipkart -Dversion=1.0-SNAPSHOT -DinteractiveMode=false
+$ mvn archetype:generate -DgroupId=com.Netflix -DartifactId=Netflix -Dversion=1.0-SNAPSHOT -DinteractiveMode=false
 (Note :- For creating Maven project we need GAV parameter).
 
+============
+Phase-3
+============
+
+#8
+Building the maven project:
+-----------------------
+Execute "mvn install":
+
+	'mvn install' command executes below maven "build life cycle" phases automatically. 
+	- validate
+		validate project's structure
+	- initialize
+		prepares project with initial pre-
+		requisites ex: setting properties, creating 
+		necessary directory structure..etc.	 
+	- compile
+		compiles "main" java code.
+	- test-compile
+		compiles "test" java code
+	- test
+		Runs the test cases and generates test reports.
+	- package
+		creates jar/war.
+	- install
+		copy built artifacts i.e jar/war file into local repository $USER_HOME/.m2 
+               	(for ex. cd /home/swapnil/.m2/repository/com/Flipkart/Flipkart/1.1-SNAPSHOT$ my war file in this repository do ls after this path we will see the war/jar file                			(amazon-1.1-SNAPSHOT.war))
+
+ (Note :- 1). After mvn install target folder is created in project directory.
+	  2). mvn install command is used for compiles the code. )
+
+
+#9
+Verify Built artifacts:
+--------------------------
+Go to "target" folder and observe below.
+	
+			target
+			  |
+		classes     test-classes	surefire-reports	jar/war file
+
+
+	classes: directory contains compiled class files
+				of main source code
+	test-classes: directory contains compiled class
+				files of test source code
+				
+	surefire-reports: contains test reports.
+
+	flipkart-1.0-SNAPSHOT.war: war file of main code
+
+#
+Note: first time when we run 'mvn install' command, Maven downloads all missing dependencies into .m2  from maven's central repository.
+So we need to have internet when we run 'mvn install' command first time.
+
+
+#10
+Artifact path in local repository .m2
+# More about local repository
+ $USER_HOME/.m2/repository/groupId/artifactId/version/jar_war_file_name  (FOR EX. cd /home/swapnil/.m2/repository/com/flipkart/flipkart/1.1-SNAPSHOT/flipkart-1.1-SNAPSHOT.war)
+
+- Package naming convention:
+	artifactId-version.war (FOR EX. flipkart-1.1-SNAPSHOT.war)
+
+
+PROJECT-01 --> CREATE MAVEN web application for flipkart and perform end-to-end build and deployment.
+===========    =======================================================================================
+
+#
+create one folder where we want to store our project
+$ mkdir WebApplicationProjects
+
+#
+go to that created folder i.e. WebApplicationProjects 
+$ cd WebApplicationProjects/
+
+# 
+After Create Maven web application project in our created directory usign below command.
+
+$ mvn archetype:generate -DgroupId=com.GRRAS -DartifactId=GRRAS -Dversion=1.0-SNAPSHOT -DinteractiveMode=false -DarchetypeArtifactId=maven-archetype-webapp
+      
+	=> archetype:generate - this is generating maven project.
+        => DgroupId - this is package name. 
+	=> DartifactId - this is project name. 
+	=> Dversion - this is version. 
+	=> DinteractiveMode - keep always interactivemode is on false.
+ (Note :- Here project name is GRRAS)
+
+#
+After go to the project directory
+$ cd projectName/
+
+#
+After entering project directory Build the application using below Maven command
+$ mvn install
+
+#
+After mvn install target folder is creating in project folder in this folder Check final artifact i.e GRRAS.war file in target directory 
+ (For ex. (pom.xml  src  target) like this)
+$ ls target 
+
+#
+Then Prepare tomcat for deployments / installation
+- Download tomcat tar.gz file from apache.org site THEN 
+- Extract it. THEN 
+- Make sure JAVA_HOME and M2_HOME environment variable is set in .bashrc file.
+
+#
+Then copy GRRAS.war file from target folder to tomcat webapps folder means, (Deploy GRRAS.war into tomcat webapp).
+$ cp GRRAS.war $TOMCAT_HOME/webapps
+
+#
+Start tomcat server
+$ $TOMCAT_HOME/bin/./startup.sh
+
+Stop tomcat server
+$ $TOMCAT_HOME/bin/./shutdown.sh
+
+#
+Launch application with below URL.
+http://localhost or system-IP:8080/GRRAS
+[http://tomcat_server_name:8080/warfilename]
+
+#
+find IP using below command
+$ hostname -i
